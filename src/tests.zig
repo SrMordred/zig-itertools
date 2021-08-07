@@ -175,18 +175,4 @@ test "multiple iterators" {
         var result = range(i32, .{ .end = 100 }).map(double).filter(divBy10).fold(100, sum);
         try IsEqual(result, 2000);
     }
-
-    {
-        var gpa = std.heap.GeneralPurposeAllocator(.{}){};
-        var alloc = &gpa.allocator;
-        var array = try range(i32, .{ .end = 100 })
-            .map(double)
-            .filter(divBy10)
-            .toArrayList(alloc);
-        
-        print("{}\n", ,{ array.items });
-
-        var result = range(i32, .{ .end = 100 }).map(double).filter(divBy10).fold(100, sum);
-        try IsEqual(result, 2000);
-    }
 }
